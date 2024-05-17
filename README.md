@@ -16,8 +16,8 @@ This is a RESTful API for an e-commerce platform built with FastAPI and PostgreS
 - **Database**: PostgreSQL
 - **ORM**: SQLAlchemy
 - **Authentication**: JWT
-- **Environment Management**: Virtualenv
-- **Deployment**: Uvicorn
+- **Environment Management**: Docker, Virtualenv
+- **Deployment**: Uvicorn, Docker Compose
 
 ## Project Structure
 ```bash
@@ -49,8 +49,8 @@ ecommerce_api/
 ## Installation
 
 ### Prerequisites
-- Python 3.8+
-- PostgreSQL
+- Docker
+- Docker Compose
 
 ### Setup
 
@@ -60,39 +60,43 @@ ecommerce_api/
     cd ecommerce_api
     ```
 
-2. **Create a virtual environment and activate it**:
-    ```bash
-    python -m venv env
-    source env/bin/activate  # On Windows, use `env\Scripts\activate`
-    ```
-
-3. **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4. **Set up environment variables**:
+2. **Create a `.env` file**:
     Create a `.env` file in the root directory and add the following:
     ```env
-    DATABASE_URL=postgresql://username:password@localhost:5432/ecommerce_db
-    SECRET_KEY=your_secret_key
+    DATABASE_URL=postgresql://ecom_user:ecom_pass@db:5432/ecommerce_db
+    SECRET_KEY=your_generated_secret_key
     ALGORITHM=HS256
     ACCESS_TOKEN_EXPIRE_MINUTES=30
     ```
 
-5. **Run database migrations**:
+3. **Build and start the Docker containers**:
     ```bash
-    alembic upgrade head
+    docker-compose up --build
     ```
 
-6. **Run the application**:
+4. **Apply database migrations**:
     ```bash
-    uvicorn app.main:app --reload
+    docker-compose run web alembic upgrade head
     ```
+
+### Accessing the Application
+
+- **FastAPI Application**: Open your browser and go to `http://localhost:8000/docs` to see the interactive API documentation (Swagger UI).
+- **pgAdmin**: Open your browser and go to `http://localhost:5050` to access pgAdmin.
+  - **Login**: Use the default email `admin@admin.com` and password `admin`.
+  - **Add a New Server**:
+    - **General**:
+      - **Name**: `PostgreSQL`
+    - **Connection**:
+      - **Host name/address**: `db`
+      - **Port**: `5432`
+      - **Username**: `ecom_user`
+      - **Password**: `ecom_pass`
+      - **Maintenance database**: `ecommerce_db`
 
 ## Usage
-- Open your browser and go to `http://127.0.0.1:8000/docs` to see the interactive API documentation (Swagger UI).
-- You can also visit `http://127.0.0.1:8000/redoc` for ReDoc documentation.
+- Open your browser and go to `http://localhost:8000/docs` to see the interactive API documentation (Swagger UI).
+- You can also visit `http://localhost:8000/redoc` for ReDoc documentation.
 
 ## Contributing
 1. Fork the repository
