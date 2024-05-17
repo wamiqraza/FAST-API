@@ -1,3 +1,9 @@
 fastapi
-unicorn
 sqlalchemy
+alembic
+uvicorn
+psycopg2-binary
+pydantic
+python-jose
+passlib[bcrypt]
+python-dotenv
