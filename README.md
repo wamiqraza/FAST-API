@@ -40,6 +40,8 @@ ecommerce_api/
 │   ├── db.py
 │   └── dependencies.py
 ├── migrations/
+├── Dockerfile
+├── docker-compose.yml
 ├── .env
 ├── .gitignore
 └── requirements.txt
