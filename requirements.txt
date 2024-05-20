@@ -4,6 +4,6 @@ alembic
 uvicorn
 psycopg2-binary
 pydantic
-python-jose
+python-jose[cryptography]
 passlib[bcrypt]
 python-dotenv

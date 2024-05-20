@@ -26,24 +26,39 @@ ecommerce_api/
 ├── app/
 │   ├── api/
 │   │   ├── endpoints/
-│   │   │   └── __init__.py
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py
+│   │   │   ├── product.py
+│   │   │   ├── order.py
+│   │   │   └── auth.py
 │   │   └── __init__.py
 │   ├── core/
-│   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   └── security.py
 │   ├── crud/
-│   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── product.py
+│   │   ├── order.py
+│   │   └── auth.py
 │   ├── models/
-│   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── product.py
+│   │   └── order.py
 │   ├── schemas/
-│   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   ├── product.py
+│   │   └── order.py
 │   ├── main.py
 │   ├── db.py
 │   └── dependencies.py
 ├── migrations/
-├── Dockerfile
-├── docker-compose.yml
 ├── .env
 ├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
 └── requirements.txt
 
 ```
