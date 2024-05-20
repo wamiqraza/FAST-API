@@ -41,6 +41,10 @@ ecommerce-fast-api/
 │   │   ├── product.py
 │   │   ├── order.py
 │   │   └── auth.py
+│   ├── db/
+│   │   ├── __init__.py
+│   │   ├── db.py
+│   │   └── dependencies.py
 │   ├── models/
 │   │   ├── __init__.py
 │   │   ├── user.py
@@ -51,9 +55,7 @@ ecommerce-fast-api/
 │   │   ├── user.py
 │   │   ├── product.py
 │   │   └── order.py
-│   ├── main.py
-│   ├── db.py
-│   └── dependencies.py
+│   └── main.py
 ├── migrations/
 ├── .env
 ├── .gitignore
