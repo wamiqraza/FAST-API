@@ -21,7 +21,7 @@ This is a RESTful API for an e-commerce platform built with FastAPI and PostgreS
 
 ## Project Structure
 ```bash
-ecommerce_api/
+ecommerce-fast-api/
 ├── alembic/
 ├── app/
 │   ├── api/
@@ -73,8 +73,8 @@ ecommerce_api/
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/ecommerce_api.git
-    cd ecommerce_api
+    git clone https://github.com/wamiqraza/ecommerce-fast-api.git
+    cd ecommerce-fast-api
     ```
 
 2. **Create a `.env` file**:
