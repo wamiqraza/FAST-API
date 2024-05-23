@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from app import crud, schemas, core
+from app import core
+from app.crud.user import get_user_by_email
+from app.schemas.user import Token, User
 from app.db.dependencies import get_db
 from datetime import timedelta
 
@@ -11,13 +13,13 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 def authenticate_user(db: Session, username: str, password: str):
-    user = crud.get_user_by_email(db, username)
+    user = get_user_by_email(db, username)
     if not user or not core.security.verify_password(password, user.hashed_password):
         return False
     return user
 
 
-@router.post("/token", response_model=schemas.Token)
+@router.post("/token", response_model=Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = authenticate_user(db, form_data.username, form_data.password)
     if not user:
@@ -34,7 +36,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/users/me", response_model=schemas.User)
+@router.get("/users/me", response_model=User)
 async def read_users_me(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     payload = core.security.decode_access_token(token)
     if payload is None:
@@ -50,7 +52,7 @@ async def read_users_me(token: str = Depends(oauth2_scheme), db: Session = Depen
             detail="Invalid token",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    user = crud.get_user_by_email(db, email=email)
+    user = get_user_by_email(db, email=email)
     if user is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
